@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
 const sendEmail = (email, otp) => {
   const { MAIL_USERNAME, MAIL_PASSWORD } = process.env;
@@ -26,4 +26,4 @@ const sendEmail = (email, otp) => {
   });
 };
 
-export default sendEmail;
+module.exports = sendEmail;

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 const registrationSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -19,4 +19,4 @@ const registrationSchema = new mongoose.Schema({
 
 const Registration = mongoose.model("registration", registrationSchema);
 
-export default Registration;
+module.exports = Registration;

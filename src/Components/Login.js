@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Css/Login.css";
+import { useDispatch } from "react-redux";
+import { register } from "../Redux/Reducers/registerReducer.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const style = {
@@ -30,6 +34,17 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         slogin();
+        dispatch(
+          register({
+            username: data.user.username,
+            email: data.user.email,
+            token: data.token,
+            islogin: "on",
+          })
+        );
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       })
       .catch((err) => {
         console.log(err.message);
@@ -82,9 +97,16 @@ const Login = () => {
           >
             Submit
           </button>
-          <NavLink className="text-sm mt-4 text-center">
+          {/* <NavLink className="text-sm mt-4 text-center">
             Forgot password?
-          </NavLink>
+          </NavLink> */}
+          <h4 className="text-center my-4">OR</h4>
+          <Link
+            to="/register"
+            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+          >
+            Signup
+          </Link>
         </div>
       </div>
     </section>

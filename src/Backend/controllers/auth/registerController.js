@@ -1,6 +1,6 @@
-import registration from "../../Schemas/registerSchema.js";
-import sendEmail from "../../../Emails/Otp.js";
-import bcrypt from "bcrypt";
+const registration = require("../../Schemas/registerSchema.js");
+const bcrypt = require("bcrypt");
+const sendEmail = require("../../../Emails/Otp.js");
 
 const registerController = {
   async register(req, res, next) {
@@ -29,4 +29,4 @@ const registerController = {
   },
 };
 
-export default registerController;
+module.exports = registerController;

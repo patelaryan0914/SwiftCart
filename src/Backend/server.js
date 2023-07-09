@@ -1,14 +1,14 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import cors from "cors";
+const cors = require("cors");
 app.use(cors());
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 const { APP_PORT, MONGO_URL } = process.env;
-import routes from "./routes/index.js";
-import mongoose from "mongoose";
-import chalk from "chalk";
-import bodyParser from "body-parser";
+const routes = require("./routes");
+const mongoose = require("mongoose");
+const chalk = require("chalk");
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

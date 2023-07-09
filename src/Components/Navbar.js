@@ -1,7 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { register } from "../Redux/Reducers/registerReducer.js";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const registerinfo = useSelector((state) => state.register.value);
+  const logout = () => {
+    dispatch(
+      register({
+        username: "",
+        email: "",
+        password: "",
+        cpassword: "",
+        otp: "",
+        islogin: "off",
+        token: "",
+      })
+    );
+    window.localStorage.clear();
+  };
   return (
     <header className="text-gray-400 bg-gray-900 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -26,20 +45,29 @@ const Navbar = () => {
           <Link className="mr-5 hover:text-white">Third Link</Link>
           <Link className="mr-5 hover:text-white">Fourth Link</Link>
         </nav>
-        <button className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
-          Button
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
+        {registerinfo.islogin === "off" ? (
+          <Link
+            to="/login"
+            className="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
           >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
+            Login
+          </Link>
+        ) : (
+          <>
+            <Link
+              to="/"
+              className=" text-black inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded mt-4 md:mt-0"
+            >
+              {registerinfo.username}
+            </Link>
+            <button
+              onClick={logout}
+              className=" text-black mx-1 inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded mt-4 md:mt-0"
+            >
+              Log Out
+            </button>
+          </>
+        )}
       </div>
     </header>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Demo() {
   const [products, setProducts] = useState([]);
@@ -15,13 +16,13 @@ function Demo() {
         <div className="flex flex-wrap -m-4">
           {products.map((product) => (
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={product.id}>
-              <a className="block relative h-48 rounded overflow-hidden">
+              <Link className="block relative h-48 rounded overflow-hidden">
                 <img
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"
                   src={product.image}
                 />
-              </a>
+              </Link>
               <div className="mt-4">
                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
                   {product.category}
