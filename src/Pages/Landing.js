@@ -1,12 +1,16 @@
 import React from "react";
 import Navbar from "../Components/Navbar.js";
-import Demo from "../Components/Demo.js";
+import Hero from "../Components/Hero.js";
+import Footer from "../Components/Footer.js";
+// import Demo from "../Components/Demo.js";
 
 const Landing = () => {
   return (
     <>
       <Navbar />
-      <Demo />
+      <Hero />
+      <Footer />
+      {/* <Demo /> */}
     </>
   );
 };

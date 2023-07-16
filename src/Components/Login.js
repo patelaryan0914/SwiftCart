@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Css/Login.css";
 import { useDispatch } from "react-redux";
 import { register } from "../Redux/Reducers/registerReducer.js";
 import { ToastContainer, toast } from "react-toastify";

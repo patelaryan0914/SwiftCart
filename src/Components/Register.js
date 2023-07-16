@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Css/Register.css";
 import { useDispatch } from "react-redux";
 import { register } from "../Redux/Reducers/registerReducer.js";
 import { useNavigate } from "react-router-dom";

@@ -7,7 +7,7 @@ import Landing from "./Pages/Landing.js";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: "rgb(17,24,39)" }}>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
