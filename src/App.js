@@ -7,9 +7,9 @@ import Landing from "./Pages/Landing.js";
 
 function App() {
   return (
-    <div className="App" style={{ backgroundColor: "rgb(17,24,39)" }}>
+    <div className="App overscroll-none">
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route exact path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verifyotp" element={<Votp />} />
