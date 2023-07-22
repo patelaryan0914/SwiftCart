@@ -11,16 +11,15 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const persisteduserReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
-  reducer: { register: persistedReducer },
+  reducer: { register: persisteduserReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

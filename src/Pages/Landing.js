@@ -1,16 +1,14 @@
 import React from "react";
 import Navbar from "../Components/Navbar.js";
-import Hero from "../Components/Hero.js";
 import Footer from "../Components/Footer.js";
-// import Demo from "../Components/Demo.js";
+import { Outlet } from "react-router-dom";  
 
 const Landing = () => {
   return (
     <>
       <Navbar />
-      <Hero />
+      <Outlet />
       <Footer />
-      {/* <Demo /> */}
     </>
   );
 };

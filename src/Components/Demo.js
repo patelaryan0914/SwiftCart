@@ -16,7 +16,10 @@ function Demo() {
         <div className="flex flex-wrap -m-4">
           {products.map((product) => (
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={product.id}>
-              <Link className="block relative h-48 rounded overflow-hidden">
+              <Link
+                to="/item"
+                className="block relative h-48 rounded overflow-hidden"
+              >
                 <img
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"

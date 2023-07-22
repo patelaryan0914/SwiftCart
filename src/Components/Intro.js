@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Hero = () => {
+const Intro = () => {
   return (
     <section class="text-gray-400 bg-gray-900 body-font">
       <div class="container mx-auto flex px-5 py-44 md:flex-row flex-col items-center">
@@ -17,7 +17,10 @@ const Hero = () => {
             all just a few clicks away.
           </p>
           <div class="flex justify-center">
-            <Link to="/" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <Link
+              to="/demo"
+              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
               Start Shopping
             </Link>
           </div>
@@ -34,4 +37,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Intro;
