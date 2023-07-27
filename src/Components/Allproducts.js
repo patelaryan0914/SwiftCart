@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import image from "../img/buds.png";
 
-function Demo() {
+function Allproducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ function Demo() {
                 <img
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"
-                  src={product.image}
+                  src={image}
                 />
               </Link>
               <div className="mt-4">
@@ -43,4 +44,4 @@ function Demo() {
   );
 }
 
-export default Demo;
+export default Allproducts;
