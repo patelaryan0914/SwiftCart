@@ -9,7 +9,7 @@ import Items from "./Components/Items.js";
 
 const App = () => {
   return (
-    <div className="App overscroll-none">
+    <div className="App bg-gray">
       <Routes>
         <Route exact path="/" element={<Landing />}>
           <Route index element={<Intro />} />

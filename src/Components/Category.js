@@ -11,7 +11,7 @@ const Category = () => {
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4 text-center">
           <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-            <div class="flex flex-wrap w-full bg-gray-800 sm:py-24 py-16 sm:px-10 px-6 relative">
+            <div class="flex flex-wrap w-full bg-gray-800 hover:scale-110 ease-in duration-500 sm:py-24 py-16 sm:px-10 px-6 relative">
               <Link to="/products">
                 <img
                   alt="gallery"
@@ -27,7 +27,7 @@ const Category = () => {
             </div>
           </div>
           <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-            <div class="flex flex-wrap w-full bg-gray-800 sm:py-24 py-16 sm:px-10 px-6 relative">
+            <div class="flex flex-wrap w-full bg-gray-800 hover:scale-110 ease-in duration-500 sm:py-24 py-16 sm:px-10 px-6 relative">
               <Link to="/products">
                 <img
                   alt="gallery"
@@ -43,7 +43,7 @@ const Category = () => {
             </div>
           </div>
           <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-            <div class="flex flex-wrap w-full bg-gray-800 sm:py-24 py-16 sm:px-10 px-6 relative">
+            <div class="flex flex-wrap w-full bg-gray-800 hover:scale-110 ease-in duration-500 sm:py-24 py-16 sm:px-10 px-6 relative">
               <Link to="/products">
                 <img
                   alt="gallery"
@@ -59,7 +59,7 @@ const Category = () => {
             </div>
           </div>
           <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-            <div class="flex flex-wrap w-full bg-gray-800 sm:py-24 py-16 sm:px-10 px-6 relative">
+            <div class="flex flex-wrap w-full bg-gray-800 hover:scale-110 ease-in duration-500 sm:py-24 py-16 sm:px-10 px-6 relative">
               <img
                 alt="gallery"
                 class="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
