@@ -20,9 +20,11 @@ const Intro = () => {
           </p>
           <div class="flex justify-center">
             <Link
-              to="/products"
-              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              to="/products/allproducts"
+              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6
+              focus:outline-none hover:bg-indigo-600 rounded text-lg"
             >
+              {" "}
               Start Shopping
             </Link>
           </div>
