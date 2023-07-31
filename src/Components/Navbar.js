@@ -46,7 +46,7 @@ const Navbar = () => {
           <Link className="mr-5 hover:text-white">First Link</Link>
           <Link className="mr-5 hover:text-white">Second Link</Link>
           <Link className="mr-5 hover:text-white">Third Link</Link>
-          <Link className="mr-5 hover:text-white">Fourth Link</Link>
+          <Link to="/cart" className="mr-5 hover:text-white">Cart</Link>
         </nav>
         {registerinfo.islogin === "off" ? (
           <Link

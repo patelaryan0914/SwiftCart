@@ -3,10 +3,12 @@ import bgwatch from "../img/bgwatch.png";
 import bgheadphones from "../img/bgheadphones.jpg";
 import bgbuds from "../img/bgbuds.png";
 import { Link } from "react-router-dom";
+import Contactus from "./Contactus.js";
 // import { bgwatch } from "../img/bgbuds.png";
 
 const Category = () => {
   return (
+    <>
     <section class="text-gray-400 bg-gray-900 body-font">
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4 text-center">
@@ -77,6 +79,8 @@ const Category = () => {
         </div>
       </div>
     </section>
+    <Contactus/>
+    </>
   );
 };
 

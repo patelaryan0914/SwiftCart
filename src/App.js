@@ -6,6 +6,7 @@ import Votp from "./Components/Votp.js";
 import Landing from "./Pages/Landing.js";
 import Intro from "./Components/Intro.js";
 import Items from "./Components/Items.js";
+import Cart from "./Components/Cart.js";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route exact path="/" element={<Landing />}>
           <Route index element={<Intro />} />
           <Route path="/products/:category" element={<Allproducts />} />
+          <Route path="/cart" element={<Cart/>} />
           <Route path="/item" element={<Items />} />
         </Route>
         <Route path="/login" element={<Login />} />
