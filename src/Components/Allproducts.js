@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-// import image from "../img/buds.png";
 
-function Allproducts() {
+const Allproducts = () => {
   const location = useLocation();
   const { category } = useParams();
-  // const category = location.state.category;
   const [products, setProducts] = useState([]);
   console.log(location);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("http://localhost:5000/getproducts")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [category]);
@@ -29,17 +27,17 @@ function Allproducts() {
                 <img
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"
-                  src={product.image}
+                  src=""
                 />
               </Link>
               <div className="mt-4">
                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                  {product.category}
+                  {product.product_category}
                 </h3>
                 <h2 className="text-white title-font text-lg font-medium">
-                  {product.title}
+                  {product.Product_name}
                 </h2>
-                <p className="mt-1"> ₹ {product.price}</p>
+                <p className="mt-1"> ₹ {product.product_price}</p>
               </div>
             </div>
           ))}
@@ -47,6 +45,6 @@ function Allproducts() {
       </div>
     </section>
   );
-}
+};
 
 export default Allproducts;

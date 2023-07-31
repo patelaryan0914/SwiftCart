@@ -61,7 +61,7 @@ const Login = () => {
           </h1>
           <div className="relative mb-5">
             <label
-              htmlFor="email"
+              htmlhtmlFor="email"
               className="leading-7 text-base text-gray-400"
             >
               Email
@@ -77,7 +77,7 @@ const Login = () => {
           </div>
           <div className="relative mb-5">
             <label
-              htmlFor="password"
+              htmlhtmlFor="password"
               className="leading-7 text-base text-gray-400"
             >
               Password
