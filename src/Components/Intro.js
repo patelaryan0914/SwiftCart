@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import image from "../img/buds.png";
 import Category from "./Category";
 
 const Intro = () => {
@@ -33,7 +32,7 @@ const Intro = () => {
           <img
             className="object-cover object-center rounded"
             alt="hero"
-            src={image}
+            src="/images/buds.jpg"
           />
         </div>
       </div>

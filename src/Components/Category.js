@@ -1,7 +1,4 @@
 import React from "react";
-import bgwatch from "../img/bgwatch.png";
-import bgheadphones from "../img/bgheadphones.jpg";
-import bgbuds from "../img/bgbuds.png";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus.js";
 // import { bgwatch } from "../img/bgbuds.png";
@@ -18,7 +15,7 @@ const Category = () => {
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                    src={bgheadphones}
+                    src="/images/bgheadphones.jpg"
                   />
                 </Link>
                 <div className="text-center relative z-10 w-full">
@@ -34,7 +31,7 @@ const Category = () => {
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                    src={bgwatch}
+                    src="/images/bgwatch.png"
                   />
                 </Link>
                 <div className="text-center relative z-10 w-full">
@@ -50,7 +47,7 @@ const Category = () => {
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                    src={bgbuds}
+                    src="/images/bgbuds.png"
                   />
                 </Link>
                 <div className=" relative z-10 w-full">
@@ -66,7 +63,7 @@ const Category = () => {
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                    src={bgheadphones}
+                    src="/images/bgheadphones.jpg"
                   />
                 </Link>
                 <div className="text-center relative z-10 w-full">
