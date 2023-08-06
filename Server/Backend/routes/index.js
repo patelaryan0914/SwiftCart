@@ -12,7 +12,7 @@ router.post("/register", registerController.register);
 
 router.post("/otp", registerController.otp);
 
-router.get("/getproducts", fetchproduct.fetchallproduct);
+router.post("/getproducts", fetchproduct.fetchallproductcategory);
 
-router.post("/getproduct", fetchproduct.fetchoneproduct);
+router.post("/getproduct", fetchproduct.fetchoneproductid);
 module.exports = router;

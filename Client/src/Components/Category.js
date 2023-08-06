@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus.js";
-// import { bgwatch } from "../img/bgbuds.png";
 
 const Category = () => {
   return (
@@ -11,7 +10,7 @@ const Category = () => {
           <div className="flex flex-wrap -m-4 text-center">
             <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
               <div className="flex flex-wrap w-full bg-gray-800 hover:scale-110 ease-in duration-500 sm:py-24 py-16 sm:px-6 px-6 relative">
-                <Link to="/products/headphones">
+                <Link to="/products/smartphones">
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
@@ -20,7 +19,7 @@ const Category = () => {
                 </Link>
                 <div className="text-center relative z-10 w-full">
                   <h2 className="text-xl text-white font-medium title-font mb-2">
-                    Headphones
+                    Smart Phones
                   </h2>
                 </div>
               </div>
@@ -59,7 +58,7 @@ const Category = () => {
             </div>
             <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
               <div className="flex flex-wrap w-full bg-gray-800 hover:scale-110 ease-in duration-500 sm:py-24 py-16 sm:px-10 px-6 relative">
-                <Link to="/products/speakers">
+                <Link to="/products/headphones">
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
@@ -68,7 +67,7 @@ const Category = () => {
                 </Link>
                 <div className="text-center relative z-10 w-full">
                   <h2 className="text-xl text-white font-medium title-font mb-2">
-                    Speakers
+                    Headphones
                   </h2>
                 </div>
               </div>

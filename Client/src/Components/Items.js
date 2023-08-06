@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const Items = () => {
-  const [product, setProduct] = useState(" ");
-  const { productid } = useParams();
+  const [product, setProduct] = useState([]);
+  const { id } = useParams();
+  const productid = id;
   useEffect(() => {
     fetch("http://localhost:5000/getproduct", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -15,7 +16,10 @@ const Items = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setProduct(data));
+      .then((data) => setProduct(data))
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, [productid]);
   return (
     <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">

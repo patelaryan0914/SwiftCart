@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const Allproducts = () => {
   const location = useLocation();
-  // const { category } = useParams();
+  const { category } = useParams();
   const [products, setProducts] = useState([]);
   console.log(location);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getproducts")
+    fetch("http://localhost:5000/getproducts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        category,
+      }),
+    })
       .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+      .then((data) => setProducts(data))
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [category]);
 
   return (
     <section className="text-gray-400 bg-gray-900 body-font">
