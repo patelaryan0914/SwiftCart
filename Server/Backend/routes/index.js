@@ -14,5 +14,5 @@ router.post("/otp", registerController.otp);
 
 router.get("/getproducts", fetchproduct.fetchallproduct);
 
-router.get("/getproduct", fetchproduct.fetchoneproduct);
+router.post("/getproduct", fetchproduct.fetchoneproduct);
 module.exports = router;

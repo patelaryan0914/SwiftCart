@@ -32,7 +32,7 @@ const Intro = () => {
           <img
             className="object-cover object-center rounded"
             alt="hero"
-            src="/images/buds.jpg"
+            src="/images/buds.png"
           />
         </div>
       </div>
