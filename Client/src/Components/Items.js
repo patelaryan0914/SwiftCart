@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ReactComponent as Cart } from "../svgs/Cart.svg"
 
 const Items = () => {
+  const [color,setColor]=useState("currentcolor")
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const productid = id;
+  const addCart = () =>{
+    if(color==="currentcolor"){
+      setColor("#993a3a");
+    }else{
+      setColor("currentcolor");
+    }
+  }
   useEffect(() => {
     fetch("http://localhost:5000/getproduct", {
       method: "POST",
@@ -122,16 +131,7 @@ const Items = () => {
                   </svg>
                 </Link>
                 <Link>
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokelinewidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                  </svg>
+                  <Cart/>
                 </Link>
               </span>
             </div>
@@ -145,17 +145,7 @@ const Items = () => {
                 Button
               </button>
               <button className="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                <svg
-                  fill="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokelinewidth="2"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                  style={{ color: `none` }}
-                >
-                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                </svg>
+                <Cart fill={color} onClick={addCart}/>
               </button>
             </div>
           </div>
