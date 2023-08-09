@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ReactComponent as Cart } from "../svgs/Cart.svg"
+import { ReactComponent as Cart } from "../svgs/Cart.svg";
 
 const Items = () => {
-  const [color,setColor]=useState("currentcolor")
+  const [color, setColor] = useState("currentcolor");
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const productid = id;
-  const addCart = () =>{
-    if(color==="currentcolor"){
+  const addCart = () => {
+    if (color === "currentcolor") {
       setColor("#993a3a");
-    }else{
+    } else {
       setColor("currentcolor");
     }
-  }
+  };
   useEffect(() => {
     fetch("http://localhost:5000/getproduct", {
       method: "POST",
@@ -131,7 +131,16 @@ const Items = () => {
                   </svg>
                 </Link>
                 <Link>
-                  <Cart/>
+                  <svg
+                    fill="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    class="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                  </svg>
                 </Link>
               </span>
             </div>
@@ -144,8 +153,12 @@ const Items = () => {
               <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                 Button
               </button>
-              <button className="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                <Cart fill={color} onClick={addCart}/>
+              <button
+                className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                onClick={addCart}
+              >
+                <span className="mr-2">Add to Cart</span>
+                <Cart fill={color} />
               </button>
             </div>
           </div>
