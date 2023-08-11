@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Items = () => {
+  const [present, setPresent] = useState(" ");
   const [color, setColor] = useState("currentcolor");
   const [product, setProduct] = useState([]);
   const { id } = useParams();
@@ -18,8 +19,7 @@ const Items = () => {
     theme: "dark",
   };
   const addCart = () => {
-    if (color === "currentcolor") {
-      setColor("#993a3a");
+    if (present === "notinCart") {
       fetch("http://localhost:5000/addtocart", {
         method: "POST",
         headers: {
@@ -31,12 +31,36 @@ const Items = () => {
         }),
       })
         .then((res) => res.json())
-        .then((data) => productadded())
+        .then((data) => {
+          productadded();
+          setPresent("inCart");
+          setColor("#993a3a");
+        })
         .catch((err) => {
+          erroroc();
           console.log(err.message);
         });
     } else {
-      setColor("currentcolor");
+      fetch("http://localhost:5000/removefromcart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          productid,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          removed();
+          setPresent("notinCart");
+          setColor("currentcolor");
+        })
+        .catch((err) => {
+          erroroc();
+          console.log(err.message);
+        });
     }
   };
   useEffect(() => {
@@ -45,17 +69,27 @@ const Items = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productid }),
+      body: JSON.stringify({ productid, email }),
     })
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data);
+        setProduct(data.singleproduct);
+        if (data.present !== 0) {
+          setColor("#993a3a");
+          setPresent("inCart");
+        } else {
+          setColor("currentcolor");
+          setPresent("notinCart");
+        }
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }, [productid]);
+  }, [productid, email, present]);
   const productadded = () => toast.success("Product Added Successfully", style);
+  const removed = () => toast.success("Product Removed Successfully", style);
+  const erroroc = () =>
+    toast.error("Something Went Wrong Please try Again later....", style);
   return (
     <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">
       <ToastContainer />
@@ -163,7 +197,7 @@ const Items = () => {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    class="w-5 h-5"
+                    className="w-5 h-5"
                     viewBox="0 0 24 24"
                   >
                     <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>

@@ -18,4 +18,6 @@ router.post("/getproduct", fetchproduct.fetchoneproductid);
 
 router.post("/addtocart", fetchproduct.addtocart);
 
+router.post("/removefromcart", fetchproduct.removefromcart);
+
 module.exports = router;
