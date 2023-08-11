@@ -1,15 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ReactComponent as Cart } from "../svgs/Cart.svg";
+import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Items = () => {
   const [color, setColor] = useState("currentcolor");
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const productid = id;
+  const register = useSelector((state) => state.register.value);
+  const { email } = register;
+  const style = {
+    position: "bottom-center",
+    backgroundColor: "rgb(17 24 39)",
+    theme: "dark",
+  };
   const addCart = () => {
     if (color === "currentcolor") {
       setColor("#993a3a");
+      fetch("http://localhost:5000/addtocart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          productid,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => productadded())
+        .catch((err) => {
+          console.log(err.message);
+        });
     } else {
       setColor("currentcolor");
     }
@@ -20,18 +45,20 @@ const Items = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        productid,
-      }),
+      body: JSON.stringify({ productid }),
     })
       .then((res) => res.json())
-      .then((data) => setProduct(data))
+      .then((data) => {
+        setProduct(data);
+      })
       .catch((err) => {
         console.log(err.message);
       });
   }, [productid]);
+  const productadded = () => toast.success("Product Added Successfully", style);
   return (
     <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">
+      <ToastContainer />
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img
