@@ -20,4 +20,6 @@ router.post("/addtocart", fetchproduct.addtocart);
 
 router.post("/removefromcart", fetchproduct.removefromcart);
 
+router.post("/getforcart", fetchproduct.fetchproductfromcart);
+
 module.exports = router;

@@ -1,76 +1,74 @@
-import React from 'react'
-import { Link } from 'react-router-dom/dist'
+import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState("0");
+  const register = useSelector((state) => state.register.value);
+  const { email } = register;
+  useEffect(() => {
+    fetch("http://localhost:5000/getforcart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.cartproducts);
+        setTotal(data.total);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [email]);
   return (
     <section className="text-gray-400 bg-gray-900 body-font">
-  <div className="container h-screen px-5 py-24 mx-auto">
-    <div className="flex flex-col text-center w-full mb-20">
-      <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">Cart</h1>
-      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Banh mi cornhole echo park skateboard authentic crucifix neutra tilde lyft biodiesel artisan direct trade mumblecore 3 wolf moon twee</p>
-    </div>
-    <div className="lg:w-2/3 w-full mx-auto overflow-auto">
-      <table className="table-auto w-full text-left whitespace-no-wrap">
-        <thead>
-          <tr>
-            <th className="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Plan</th>
-            <th className="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Speed</th>
-            <th className="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Storage</th>
-            <th className="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Price</th>
-            <th className="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="px-4 py-3">Start</td>
-            <td className="px-4 py-3">5 Mb/s</td>
-            <td className="px-4 py-3">15 GB</td>
-            <td className="px-4 py-3 text-lg text-white">Free</td>
-            <td className="w-10 text-center">
-              <input name="plan" type="radio"/>
-            </td>
-          </tr>
-          <tr>
-            <td className="border-t-2 border-gray-800 px-4 py-3">Pro</td>
-            <td className="border-t-2 border-gray-800 px-4 py-3">25 Mb/s</td>
-            <td className="border-t-2 border-gray-800 px-4 py-3">25 GB</td>
-            <td className="border-t-2 border-gray-800 px-4 py-3 text-lg text-white">$24</td>
-            <td className="border-t-2 border-gray-800 w-10 text-center">
-              <input name="plan" type="radio"/>
-            </td>
-          </tr>
-          <tr>
-            <td className="border-t-2 border-gray-800 px-4 py-3">Business</td>
-            <td className="border-t-2 border-gray-800 px-4 py-3">36 Mb/s</td>
-            <td className="border-t-2 border-gray-800 px-4 py-3">40 GB</td>
-            <td className="border-t-2 border-gray-800 px-4 py-3 text-lg text-white">$50</td>
-            <td className="border-t-2 border-gray-800 w-10 text-center">
-              <input name="plan" type="radio"/>
-            </td>
-          </tr>
-          <tr>
-            <td className="border-t-2 border-b-2 border-gray-800 px-4 py-3">Exclusive</td>
-            <td className="border-t-2 border-b-2 border-gray-800 px-4 py-3">48 Mb/s</td>
-            <td className="border-t-2 border-b-2 border-gray-800 px-4 py-3">120 GB</td>
-            <td className="border-t-2 border-b-2 border-gray-800 px-4 py-3 text-lg text-white">$72</td>
-            <td className="border-t-2 border-b-2 border-gray-800 w-10 text-center">
-              <input name="plan" type="radio"/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-      <Link className="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">Learn More
-        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
-        </svg>
-      </Link>
-      <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Button</button>
-    </div>
-  </div>
-</section>
-  )
-}
+      <div className="container px-5 py-24 mx-auto">
+        <div className="flex flex-col text-center w-full mb-20">
+          <h1 className="sm:text-3xl text-4xl font-medium title-font text-white mb-1">
+            Cart
+          </h1>
+          <h2 className="text-xl text-indigo-400 tracking-widest font-medium title-font">
+            Shop now and turn your desires into delivered delights!
+          </h2>
+        </div>
+        {products.map((product) => (
+          <>
+            <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-800 sm:flex-row flex-col">
+              <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full text-indigo-400 bg-gray-800 flex-shrink-0">
+                <img
+                  alt="team"
+                  className="flex-shrink-0 rounded-lg  object-cover object-center sm:mb-0 mb-4"
+                  src={product.product_image}
+                />
+              </div>
+              <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                <h2 className="text-white text-lg title-font font-medium mb-2">
+                  {product.product_name}
+                </h2>
+                <h1 className="mt-3 text-xl text-indigo-500 inline-flex items-center">
+                  ₹ {product.product_price}
+                </h1>
+              </div>
+            </div>
+          </>
+        ))}
+        <div className="container mx-auto py-4 px-80 flex flex-wrap flex-col sm:flex-row">
+          <button className="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            Button
+          </button>
+          <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+            <h1 className="text-xl text-indigo-400 tracking-widest font-medium title-font">
+              <span className="text-white">Total Amount: </span>₹ {total}
+            </h1>
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default Cart
+export default Cart;

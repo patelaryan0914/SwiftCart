@@ -55,6 +55,23 @@ const fetchproduct = {
     );
     res.send(removed);
   },
+  async fetchproductfromcart(req, res, next) {
+    const { email } = req.body;
+    const cartfound = await cart.findOne({ email: email });
+    var total = 0;
+    const cartproducts = [];
+    for (const productid of cartfound.products) {
+      const id = productid.productid;
+      const productone = await product.findOne({ _id: id });
+      total = total + productone.product_price;
+      cartproducts.push(productone);
+    }
+    const productonj = {
+      cartproducts,
+      total,
+    };
+    res.send(productonj);
+  },
 };
 
 module.exports = fetchproduct;
