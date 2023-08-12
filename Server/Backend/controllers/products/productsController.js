@@ -60,17 +60,21 @@ const fetchproduct = {
     const cartfound = await cart.findOne({ email: email });
     var total = 0;
     const cartproducts = [];
-    for (const productid of cartfound.products) {
-      const id = productid.productid;
-      const productone = await product.findOne({ _id: id });
-      total = total + productone.product_price;
-      cartproducts.push(productone);
+    if (cartfound !== null) {
+      for (const productid of cartfound.products) {
+        const id = productid.productid;
+        const productone = await product.findOne({ _id: id });
+        total = total + productone.product_price;
+        cartproducts.push(productone);
+      }
+    } else {
+      return res.send("Your Cart is empty");
     }
-    const productonj = {
+    const productobj = {
       cartproducts,
       total,
     };
-    res.send(productonj);
+    res.send(productobj);
   },
 };
 

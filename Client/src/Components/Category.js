@@ -14,7 +14,7 @@ const Category = () => {
                   <img
                     alt="gallery"
                     className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                    src="/images/bgheadphones.jpg"
+                    src="/images/bgsmartphone.jpg"
                   />
                 </Link>
                 <div className="text-center relative z-10 w-full">

@@ -42,11 +42,10 @@ const Navbar = () => {
           </svg>
           <span className="ml-3 text-xl">SwiftCart</span>
         </Link>
-        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Link className="mr-5 hover:text-white">First Link</Link>
-          <Link className="mr-5 hover:text-white">Second Link</Link>
-          <Link className="mr-5 hover:text-white">Third Link</Link>
-          <Link to="/cart" className="mr-5 hover:text-white">Cart</Link>
+        <nav className="md:ml-auto flex flex-wrap items-center text-lg justify-center">
+          <Link to="/cart" className="mr-5 hover:text-white">
+            Cart
+          </Link>
         </nav>
         {registerinfo.islogin === "off" ? (
           <Link
