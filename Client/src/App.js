@@ -7,6 +7,7 @@ import Landing from "./Pages/Landing.js";
 import Intro from "./Components/Intro.js";
 import Items from "./Components/Items.js";
 import Cart from "./Components/Cart.js";
+import Shippingdetails from "./Components/Shippingdetails.js";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/products/:category" element={<Allproducts />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/item/:id" element={<Items />} />
+          <Route path="/shippingdetails" element={<Shippingdetails />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

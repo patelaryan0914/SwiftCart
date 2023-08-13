@@ -3,6 +3,7 @@ const {
   loginController,
   registerController,
   fetchproduct,
+  shippingdetails,
 } = require("../controllers");
 const router = express.Router();
 
@@ -21,5 +22,7 @@ router.post("/addtocart", fetchproduct.addtocart);
 router.post("/removefromcart", fetchproduct.removefromcart);
 
 router.post("/getforcart", fetchproduct.fetchproductfromcart);
+
+router.post("/addshippingaddress", shippingdetails.addDetails);
 
 module.exports = router;

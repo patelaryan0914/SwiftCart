@@ -31,7 +31,7 @@ const Navbar = () => {
     plslogin();
   };
   const plslogin = () =>
-    toast.error("To excess cart please Login to your Account", style);
+    toast.error("To excess this page please Login to your Account", style);
   return (
     <header className="text-gray-400 bg-gray-900 body-font ">
       <ToastContainer />
@@ -61,6 +61,9 @@ const Navbar = () => {
                 Home
               </Link>
               <Link className="mr-5 hover:text-white" onClick={handlelogin}>
+                Shipping Details
+              </Link>
+              <Link className="mr-5 hover:text-white" onClick={handlelogin}>
                 Cart
               </Link>
             </nav>
@@ -76,6 +79,9 @@ const Navbar = () => {
             <nav className="md:ml-auto flex flex-wrap items-center text-lg justify-center">
               <Link to="/" className="mr-5 hover:text-white">
                 Home
+              </Link>
+              <Link to="/shippingdetails  " className="mr-5 hover:text-white">
+                Shipping Details
               </Link>
               <Link to="/cart" className="mr-5 hover:text-white">
                 Cart

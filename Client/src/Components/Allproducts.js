@@ -41,7 +41,7 @@ const Allproducts = () => {
                 />
               </Link>
               <div className="mt-4">
-                <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                <h3 className="text-indigo-400 text-xs tracking-widest title-font mb-1">
                   {product.product_category}
                 </h3>
                 <h2 className="text-white title-font text-lg font-medium">

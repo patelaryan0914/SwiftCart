@@ -40,7 +40,6 @@ const Cart = () => {
             Shop now and turn your desires into delivered delights!
           </h2>
         </div>
-
         {empty === "empty" ? (
           <h2 className="text-xl text-indigo-400 text-center pb-40 tracking-widest font-medium title-font">
             Your Cart is Empty Fill it up...
@@ -63,20 +62,34 @@ const Cart = () => {
                   <h1 className="mt-3 text-xl text-indigo-500 inline-flex items-center">
                     ₹ {product.product_price}
                   </h1>
+                  {/* <span className="justify-items-end">
+                    <div className="inline-flex">
+                      <button className="bg-white-300 hover:bg-indigo-400 text-indigo-600 py-2 px-4 rounded-l">
+                        +
+                      </button>
+                      <button
+                        className="bg-white-300 hover:bg-indigo-400 text-indigo-600 py-2 px-4"
+                        disabled
+                      >
+                        Quantity
+                      </button>
+                      <button className="bg-white-300 hover:bg-indigo-400 text-indigo-600 py-2 px-4 rounded-r">
+                        -
+                      </button>
+                    </div>
+                  </span> */}
                 </div>
               </div>
             </>
           ))
         )}
-        <div className="container mx-auto py-4 px-80 flex flex-wrap flex-col sm:flex-row">
-          <button className="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+        <div className="container mx-auto py-4 px-24 sm:px-4 flex flex-col sm:flex-row items-center justify-center sm:justify-between">
+          <button className="flex text-white bg-indigo-500 border-0 py-2 px-4 sm:px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
             Buy
           </button>
-          <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-            <h1 className="text-xl text-indigo-400 tracking-widest font-medium title-font">
-              <span className="text-white">Total Amount: </span>₹ {total}
-            </h1>
-          </span>
+          <h1 className="text-xl text-indigo-400 tracking-widest font-medium title-font sm:mt-0 mt-2">
+            <span className="text-white">Total Amount: </span>₹ {total}
+          </h1>
         </div>
       </div>
     </section>
