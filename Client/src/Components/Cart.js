@@ -70,7 +70,7 @@ const Cart = () => {
         )}
         <div className="container mx-auto py-4 px-80 flex flex-wrap flex-col sm:flex-row">
           <button className="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Button
+            Buy
           </button>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             <h1 className="text-xl text-indigo-400 tracking-widest font-medium title-font">

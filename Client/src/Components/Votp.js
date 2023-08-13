@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Votp = () => {
   const [cotp, setCotp] = useState("");
+  const navigate = useNavigate();
   const register = useSelector((state) => state.register.value);
   const { username, email, password, otp } = register;
   const style = {
@@ -23,6 +24,9 @@ const Votp = () => {
     else if (otp == cotp) {
       sendData();
       snotify();
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   };
   const sendData = () => {

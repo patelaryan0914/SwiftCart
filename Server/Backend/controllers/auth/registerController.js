@@ -1,11 +1,10 @@
 const registration = require("../../Schemas/registerSchema.js");
+const cart = require("../../Schemas/cartSchema.js");
 const bcrypt = require("bcrypt");
 const sendEmail = require("../../../Emails/Otp.js");
 
 const registerController = {
   async register(req, res, next) {
-    // console.log(req.body);
-    // res.json({ msg: "REGISTER" });
     const { username, email, password } = req.body;
     try {
       const hashedpassword = await bcrypt.hash(password, 10);
@@ -15,6 +14,7 @@ const registerController = {
         password: hashedpassword,
       });
       if (done) {
+        await cart.create({ email: email }, { products: [] });
         res.json({ msg: "done" });
       }
     } catch (e) {

@@ -13,7 +13,7 @@ const Items = () => {
   const { id } = useParams();
   const productid = id;
   const register = useSelector((state) => state.register.value);
-  const { email } = register;
+  const { email, islogin } = register;
   const style = {
     position: "bottom-center",
     backgroundColor: "rgb(17 24 39)",
@@ -87,6 +87,11 @@ const Items = () => {
         console.log(err.message);
       });
   }, [productid, email, present]);
+  const handlelogin = () => {
+    plslogin();
+  };
+  const plslogin = () =>
+    toast.error("To excess cart please Login to your Account", style);
   const productadded = () => toast.success("Product Added Successfully", style);
   const removed = () => toast.success("Product Removed Successfully", style);
   const erroroc = () =>
@@ -163,13 +168,23 @@ const Items = () => {
               <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                 Buy
               </button>
-              <button
-                className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
-                onClick={addCart}
-              >
-                <span className="mr-2">Add to Cart</span>
-                <Cart fill={color} />
-              </button>
+              {islogin === "off" ? (
+                <button
+                  className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                  onClick={handlelogin}
+                >
+                  <span className="mr-2">Add to Cart</span>
+                  <Cart fill={color} />
+                </button>
+              ) : (
+                <button
+                  className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                  onClick={addCart}
+                >
+                  <span className="mr-2">Add to Cart</span>
+                  <Cart fill={color} />
+                </button>
+              )}
             </div>
           </div>
         </div>

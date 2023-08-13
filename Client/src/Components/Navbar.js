@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { register } from "../Redux/Reducers/registerReducer.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
+  const style = {
+    position: "bottom-center",
+    theme: "dark",
+  };
   const dispatch = useDispatch();
   const registerinfo = useSelector((state) => state.register.value);
   const logout = () => {
@@ -21,8 +27,14 @@ const Navbar = () => {
     );
     window.localStorage.clear();
   };
+  const handlelogin = () => {
+    plslogin();
+  };
+  const plslogin = () =>
+    toast.error("To excess cart please Login to your Account", style);
   return (
     <header className="text-gray-400 bg-gray-900 body-font ">
+      <ToastContainer />
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link
           to="/"
@@ -42,23 +54,33 @@ const Navbar = () => {
           </svg>
           <span className="ml-3 text-xl">SwiftCart</span>
         </Link>
-        <nav className="md:ml-auto flex flex-wrap items-center text-lg justify-center">
-          <Link to="/" className="mr-5 hover:text-white">
-            Home
-          </Link>
-          <Link to="/cart" className="mr-5 hover:text-white">
-            Cart
-          </Link>
-        </nav>
         {registerinfo.islogin === "off" ? (
-          <Link
-            to="/login"
-            className="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
-          >
-            Login
-          </Link>
+          <>
+            <nav className="md:ml-auto flex flex-wrap items-center text-lg justify-center">
+              <Link to="/" className="mr-5 hover:text-white">
+                Home
+              </Link>
+              <Link className="mr-5 hover:text-white" onClick={handlelogin}>
+                Cart
+              </Link>
+            </nav>
+            <Link
+              to="/login"
+              className="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
+            >
+              Login
+            </Link>
+          </>
         ) : (
           <>
+            <nav className="md:ml-auto flex flex-wrap items-center text-lg justify-center">
+              <Link to="/" className="mr-5 hover:text-white">
+                Home
+              </Link>
+              <Link to="/cart" className="mr-5 hover:text-white">
+                Cart
+              </Link>
+            </nav>
             <Link
               to="/"
               className=" text-black inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded mt-4 md:mt-0"
