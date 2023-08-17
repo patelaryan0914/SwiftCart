@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState("0");
   const [empty, SetEmpty] = useState("notempty");
+  const [shipping, setShipping] = useState("notpresent");
   const register = useSelector((state) => state.register.value);
   const { email } = register;
+  const style = {
+    position: "bottom-center",
+    backgroundColor: "rgb(17 24 39)",
+    theme: "dark",
+  };
   useEffect(() => {
     fetch("http://localhost:5000/getforcart", {
       method: "POST",
@@ -18,10 +26,17 @@ const Cart = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setProducts(data.cartproducts);
         setTotal(data.total);
-        if (data === "Your Cart is empty" || data.cartproducts.length === 0) {
+        if (data.present === "present") {
+          setShipping("present");
+        } else {
+          setShipping("notpresent");
+        }
+        if (
+          data.msg === "Your Cart is empty" ||
+          data.cartproducts.products.length === 0
+        ) {
           SetEmpty("empty");
         }
       })
@@ -29,8 +44,15 @@ const Cart = () => {
         console.log(err.message);
       });
   }, [email]);
+  const buysuccess = () => {
+    toast.success("Purchase Succesfull", style);
+  };
+  const notpresent = () => {
+    toast.error("Please add your shipping details", style);
+  };
   return (
-    <section className="text-gray-400 bg-gray-900 body-font">
+    <section className="text-gray-400 bg-gray-900 body-font h-screen">
+      <ToastContainer />
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
           <h1 className="sm:text-3xl text-4xl font-medium title-font text-white mb-1">
@@ -52,42 +74,54 @@ const Cart = () => {
                   <img
                     alt="team"
                     className="flex-shrink-0 rounded-lg  object-cover object-center sm:mb-0 mb-4"
-                    src={product.product_image}
+                    src={product.products.product_image}
                   />
                 </div>
                 <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                   <h2 className="text-white text-lg title-font font-medium mb-2">
-                    {product.product_name}
+                    {product.products.product_name}
                   </h2>
-                  <h1 className="mt-3 text-xl text-indigo-500 inline-flex items-center">
-                    ₹ {product.product_price}
-                  </h1>
-                  {/* <span className="justify-items-end">
-                    <div className="inline-flex">
-                      <button className="bg-white-300 hover:bg-indigo-400 text-indigo-600 py-2 px-4 rounded-l">
+                  <div className="flex justify-between items-center">
+                    <h1 className="text-xl text-indigo-500">
+                      ₹ {product.products.product_price}
+                    </h1>
+                    {/* <div className="inline-flex">
+                      <button className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded">
                         +
                       </button>
                       <button
-                        className="bg-white-300 hover:bg-indigo-400 text-indigo-600 py-2 px-4"
+                        className="bg-white-500 text-white hover:text-white py-2 px-4"
                         disabled
                       >
-                        Quantity
+                        {product.productQuantity}
                       </button>
-                      <button className="bg-white-300 hover:bg-indigo-400 text-indigo-600 py-2 px-4 rounded-r">
+                      <button className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded">
                         -
                       </button>
-                    </div>
-                  </span> */}
+                    </div> */}
+                  </div>
                 </div>
               </div>
             </>
           ))
         )}
         <div className="container mx-auto py-4 px-24 sm:px-4 flex flex-col sm:flex-row items-center justify-center sm:justify-between">
-          <button className="flex text-white bg-indigo-500 border-0 py-2 px-4 sm:px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Buy
-          </button>
-          <h1 className="text-xl text-indigo-400 tracking-widest font-medium title-font sm:mt-0 mt-2">
+          {shipping === "present" ? (
+            <button
+              className="flex text-white bg-indigo-500 border-0 py-2 px-4 sm:px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              onClick={buysuccess}
+            >
+              Buy
+            </button>
+          ) : (
+            <button
+              className="flex text-white bg-indigo-500 border-0 py-2 px-4 sm:px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              onClick={notpresent}
+            >
+              Buy
+            </button>
+          )}
+          <h1 className="text-xl text-indigo-400 tracking-widest font-medium title-font mt-2 sm:mt-0">
             <span className="text-white">Total Amount: </span>₹ {total}
           </h1>
         </div>
