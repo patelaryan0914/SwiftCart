@@ -18,43 +18,71 @@ const fetchproduct = {
   async fetchoneproductid(req, res, next) {
     const { productid, email } = req.body;
     const singleproduct = await product.findOne({ _id: productid });
-    const presentin = await cart.findOne({
-      email: email,
-      "products.productid": productid,
-    });
-    if (presentin === null) {
-      var present = 0;
-    }
+    const presentin = await cart.findOne(
+      {
+        email: email,
+      },
+      { products: { $elemMatch: { productid: productid } } }
+    );
     const objectpass = {
       singleproduct,
-      present,
+      presentin,
     };
     res.json(objectpass);
   },
   async addtocart(req, res, next) {
-    const { email, productid } = req.body;
+    const { email, productid, quantity } = req.body;
+    console.log(email, productid, quantity);
     const user = await cart.findOne({ email: email });
+    const itemhas = await cart.findOne({
+      products: { $elemMatch: { productid: productid } },
+    });
+    console.log(itemhas);
     if (!user) {
       const added = await cart.create({
         email: email,
-        products: { productid: productid, productQuantity: 1 },
+        products: { productid: productid, productQuantity: quantity },
       });
       res.send(added);
-    } else {
+    } else if (!itemhas) {
       const added = await cart.findOneAndUpdate(
         { email: email },
-        { $push: { products: { productid: productid, productQuantity: 1 } } }
+        {
+          $push: {
+            products: { productid: productid, productQuantity: quantity },
+          },
+        }
+      );
+      res.send(added);
+    } else if (itemhas && quantity === 0) {
+      const removed = await cart.findOneAndUpdate(
+        { email: email },
+        {
+          $pull: {
+            products: { productid: productid },
+          },
+        }
+      );
+      res.send(removed);
+    } else {
+      await cart.findOneAndUpdate(
+        { email: email },
+        {
+          $pull: {
+            products: { productid: productid },
+          },
+        }
+      );
+      const added = await cart.findOneAndUpdate(
+        { email: email },
+        {
+          $push: {
+            products: { productid: productid, productQuantity: quantity },
+          },
+        }
       );
       res.send(added);
     }
-  },
-  async removefromcart(req, res, next) {
-    const { email, productid } = req.body;
-    const removed = await cart.updateOne(
-      { email: email },
-      { $pull: { products: { productid: productid } } }
-    );
-    res.send(removed);
   },
   async fetchproductfromcart(req, res, next) {
     const { email } = req.body;

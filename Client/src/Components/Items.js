@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Items = () => {
   const [present, setPresent] = useState(" ");
+  var [quantity, setQuantity] = useState(0);
   const [color, setColor] = useState("currentcolor");
   const [product, setProduct] = useState([]);
   const { id } = useParams();
@@ -20,7 +21,7 @@ const Items = () => {
     theme: "dark",
   };
   const addCart = () => {
-    if (present === "notinCart") {
+    if (quantity >= 0) {
       fetch("http://localhost:5000/addtocart", {
         method: "POST",
         headers: {
@@ -29,6 +30,7 @@ const Items = () => {
         body: JSON.stringify({
           email,
           productid,
+          quantity,
         }),
       })
         .then((res) => res.json())
@@ -42,26 +44,7 @@ const Items = () => {
           console.log(err.message);
         });
     } else {
-      fetch("http://localhost:5000/removefromcart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          productid,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          removed();
-          setPresent("notinCart");
-          setColor("currentcolor");
-        })
-        .catch((err) => {
-          erroroc();
-          console.log(err.message);
-        });
+      quantityerr();
     }
   };
   useEffect(() => {
@@ -75,10 +58,12 @@ const Items = () => {
       .then((res) => res.json())
       .then((data) => {
         setProduct(data.singleproduct);
-        if (data.present !== 0) {
+        setQuantity(data.presentin.products[0].productQuantity);
+        console.log(quantity);
+        if (data.presentin.products[0].productQuantity !== 0) {
           setColor("#993a3a");
           setPresent("inCart");
-        } else {
+        } else if (data.presentin.products === null) {
           setColor("currentcolor");
           setPresent("notinCart");
         }
@@ -86,16 +71,18 @@ const Items = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [productid, email, present]);
+    // eslint-disable-next-line
+  }, []);
   const handlelogin = () => {
     plslogin();
   };
   const plslogin = () =>
     toast.error("To excess cart please Login to your Account", style);
-  const productadded = () => toast.success("Product Added Successfully", style);
-  const removed = () => toast.success("Product Removed Successfully", style);
+  const productadded = () =>
+    toast.success("Product Quantity Updated Successfully", style);
   const erroroc = () =>
     toast.error("Something Went Wrong Please try Again later....", style);
+  const quantityerr = () => toast.error("Number should be >= 0", style);
   return (
     <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">
       <ToastContainer />
@@ -118,7 +105,6 @@ const Items = () => {
                 {Array.from({ length: product.product_reviews }, (_, index) => (
                   <Review key={index} />
                 ))}
-                <span className="ml-3">{product.product_reviews} Reviews</span>
               </span>
               <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-800 text-gray-500 space-x-2">
                 <Link>
@@ -165,9 +151,30 @@ const Items = () => {
               <span className="title-font font-medium text-2xl text-white">
                 ₹ {product.product_price}
               </span>
-              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                Buy
-              </button>
+              <div className="inline-flex ml-auto">
+                <button
+                  className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded"
+                  onClick={() => {
+                    setQuantity((quantity = quantity + 1));
+                  }}
+                >
+                  +
+                </button>
+                <button
+                  className="bg-white-500 text-white hover:text-white py-2 px-4"
+                  disabled
+                >
+                  {present === "incart" ? 0 : <h1>{quantity}</h1>}
+                </button>
+                <button
+                  className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded"
+                  onClick={() => {
+                    setQuantity((quantity = quantity - 1));
+                  }}
+                >
+                  -
+                </button>
+              </div>
               {islogin === "off" ? (
                 <button
                   className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"

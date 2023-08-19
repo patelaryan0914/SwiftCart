@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -71,11 +71,13 @@ const Cart = () => {
             <>
               <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-800 sm:flex-row flex-col">
                 <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full text-indigo-400 bg-gray-800 flex-shrink-0">
-                  <img
-                    alt="team"
-                    className="flex-shrink-0 rounded-lg  object-cover object-center sm:mb-0 mb-4"
-                    src={product.products.product_image}
-                  />
+                  <Link to={{ pathname: "/item/" + product.products._id }}>
+                    <img
+                      alt="team"
+                      className="flex-shrink-0 rounded-lg  object-cover object-center sm:mb-0 mb-4"
+                      src={product.products.product_image}
+                    />
+                  </Link>
                 </div>
                 <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                   <h2 className="text-white text-lg title-font font-medium mb-2">
@@ -85,20 +87,14 @@ const Cart = () => {
                     <h1 className="text-xl text-indigo-500">
                       ₹ {product.products.product_price}
                     </h1>
-                    {/* <div className="inline-flex">
-                      <button className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded">
-                        +
-                      </button>
+                    <div className="inline-flex">
                       <button
-                        className="bg-white-500 text-white hover:text-white py-2 px-4"
+                        className="bg-white-500 text-indigo-400 py-2 px-4"
                         disabled
                       >
                         {product.productQuantity}
                       </button>
-                      <button className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded">
-                        -
-                      </button>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
