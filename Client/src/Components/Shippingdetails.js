@@ -20,7 +20,7 @@ const Shippingdetails = () => {
   const { email } = register;
   const handlesubmit = () => {
     console.log(fname, lname, address, mnumber, city, state, zip);
-    fetch("https://swiftcart-ui77.onrender.com/addshippingaddress", {
+    fetch("https://swiftcart-kzvv.onrender.com/addshippingaddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -19,7 +19,7 @@ const Login = () => {
     handlelogin();
   };
   const handlelogin = () => {
-    fetch("https://swiftcart-ui77.onrender.com/login", {
+    fetch("https://swiftcart-kzvv.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

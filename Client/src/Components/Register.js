@@ -53,7 +53,7 @@ const Register = () => {
     }
   };
   const sendotp = () => {
-    fetch("https://swiftcart-ui77.onrender.com/otp", {
+    fetch("https://swiftcart-kzvv.onrender.com/otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
