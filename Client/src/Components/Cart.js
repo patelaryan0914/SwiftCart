@@ -17,7 +17,7 @@ const Cart = () => {
     theme: "dark",
   };
   useEffect(() => {
-    fetch("https://swiftcart-kzvv.onrender.com/getforcart", {
+    fetch("http://localhost:5000/getforcart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -22,7 +22,7 @@ const Items = () => {
   };
   const addCart = () => {
     if (quantity >= 0) {
-      fetch("https://swiftcart-kzvv.onrender.com/addtocart", {
+      fetch("http://localhost:5000/addtocart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Items = () => {
     }
   };
   useEffect(() => {
-    fetch("https://swiftcart-kzvv.onrender.com/getproduct", {
+    fetch("http://localhost:5000/getproduct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

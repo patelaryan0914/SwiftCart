@@ -19,7 +19,7 @@ const Login = () => {
     handlelogin();
   };
   const handlelogin = () => {
-    fetch("https://swiftcart-kzvv.onrender.com/login", {
+    fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
