@@ -8,7 +8,7 @@ const Allproducts = () => {
   console.log(location);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getproducts", {
+    fetch("https://swiftcart-ui77.onrender.com/getproducts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
