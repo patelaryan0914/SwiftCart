@@ -25,7 +25,7 @@ mongoose
 app.use(express.static(path.join(basepublic, "Client", "build")));
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(basepublic, "Client", "public", "index.html"));
+  res.sendFile(path.join(basepublic, "Client", "build", "index.html"));
 });
 app.use(routes);
 
