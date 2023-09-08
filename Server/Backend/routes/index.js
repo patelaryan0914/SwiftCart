@@ -4,6 +4,7 @@ const {
   registerController,
   fetchproduct,
   shippingdetails,
+  paymentdetails,
 } = require("../controllers");
 const router = express.Router();
 
@@ -24,5 +25,9 @@ router.post("/removefromcart", fetchproduct.removeproduct);
 router.post("/getforcart", fetchproduct.fetchproductfromcart);
 
 router.post("/addshippingaddress", shippingdetails.addDetails);
+
+router.post("/payment", paymentdetails.payment);
+
+router.post("/paymentverification", paymentdetails.paymentverify);
 
 module.exports = router;

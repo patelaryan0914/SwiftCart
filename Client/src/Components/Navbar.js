@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { register } from "../Redux/Reducers/registerReducer.js";
@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const style = {
     position: "bottom-center",
     theme: "dark",
@@ -26,6 +27,7 @@ const Navbar = () => {
       })
     );
     window.localStorage.clear();
+    navigate("/");
   };
   const handlelogin = () => {
     plslogin();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +9,7 @@ const Cart = () => {
   const [total, setTotal] = useState("0");
   const [empty, SetEmpty] = useState("notempty");
   const [shipping, setShipping] = useState("notpresent");
+  const navigate = useNavigate();
   const register = useSelector((state) => state.register.value);
   const { email } = register;
   const style = {
@@ -44,9 +45,56 @@ const Cart = () => {
         console.log(err.message);
       });
   }, [email]);
-  const buysuccess = () => {
-    toast.success("Purchase Succesfull", style);
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
   };
+  const dopayment = async () => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razropay failed to load!!");
+      return;
+    }
+
+    const data = await fetch("http://localhost:5000/payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount: total }),
+    }).then((t) => t.json());
+
+    const options = {
+      key: "rzp_test_NUWHhjnJv0jNAE", // Enter the Key ID generated from the Dashboard
+      amount: data.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: data.order.currency,
+      order_id: data.order.id,
+      handler: function (response) {
+        // const razorpay_payment_id = response.razorpay_payment_id;
+        navigate("/paymentsuceess");
+        console.log(response.razorpay_payment_id);
+        console.log(response.razorpay_order_id);
+        console.log(response.razorpay_signature);
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+  // const buysuccess = () => {
+  //   toast.success("Purchase Succesfull", style);
+  // };
   const notpresent = () => {
     toast.error("Please add your shipping details", style);
   };
@@ -69,7 +117,10 @@ const Cart = () => {
         ) : (
           products.map((product) => (
             <>
-              <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-800 sm:flex-row flex-col">
+              <div
+                className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-800 sm:flex-row flex-col"
+                key={product.products._id}
+              >
                 <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full text-indigo-400 bg-gray-800 flex-shrink-0">
                   <Link to={{ pathname: "/item/" + product.products._id }}>
                     <img
@@ -105,7 +156,7 @@ const Cart = () => {
           {shipping === "present" ? (
             <button
               className="flex text-white bg-indigo-500 border-0 py-2 px-4 sm:px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              onClick={buysuccess}
+              onClick={dopayment}
             >
               Buy
             </button>

@@ -13,13 +13,8 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const generateotp = () => {
-    var otp = ~~(Math.random() * 1000000);
-    if (otp.length === 6) {
-      return otp;
-    } else {
-      otp = "1" + otp.toString(10);
-      return parseInt(otp);
-    }
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    return otp.toString();
   };
   const otp = generateotp();
   const style = {
