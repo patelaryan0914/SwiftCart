@@ -32,12 +32,10 @@ const fetchproduct = {
   },
   async addtocart(req, res, next) {
     const { email, productid, quantity } = req.body;
-    console.log(email, productid, quantity);
     const user = await cart.findOne({ email: email });
     const itemhas = await cart.findOne({
       products: { $elemMatch: { productid: productid } },
     });
-    console.log(itemhas);
     if (!user) {
       const added = await cart.create({
         email: email,
@@ -54,16 +52,6 @@ const fetchproduct = {
         }
       );
       res.send(added);
-    } else if (itemhas && quantity === 0) {
-      const removed = await cart.findOneAndUpdate(
-        { email: email },
-        {
-          $pull: {
-            products: { productid: productid },
-          },
-        }
-      );
-      res.send(removed);
     } else {
       await cart.findOneAndUpdate(
         { email: email },
@@ -121,6 +109,18 @@ const fetchproduct = {
       };
       res.send(productobj);
     }
+  },
+  async removeproduct(req, res, next) {
+    const { productid, email } = req.body;
+    await cart.findOneAndUpdate(
+      { email: email },
+      {
+        $pull: {
+          products: { productid: productid },
+        },
+      }
+    );
+    res.send({ msg: "removed" });
   },
 };
 

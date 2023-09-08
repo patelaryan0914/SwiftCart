@@ -51,7 +51,7 @@ const Cart = () => {
     toast.error("Please add your shipping details", style);
   };
   return (
-    <section className="text-gray-400 bg-gray-900 body-font h-screen">
+    <section className="text-gray-400 bg-gray-900 body-font min-h-screen">
       <ToastContainer />
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
@@ -89,7 +89,7 @@ const Cart = () => {
                     </h1>
                     <div className="inline-flex">
                       <button
-                        className="bg-white-500 text-indigo-400 py-2 px-4"
+                        className="bg-white-500 text-lg text-indigo-400 py-2 px-4"
                         disabled
                       >
                         {product.productQuantity}

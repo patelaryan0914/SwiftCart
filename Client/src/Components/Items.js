@@ -21,7 +21,7 @@ const Items = () => {
     theme: "dark",
   };
   const addCart = () => {
-    if (quantity >= 0) {
+    if (quantity > 0) {
       fetch("http://localhost:5000/addtocart", {
         method: "POST",
         headers: {
@@ -46,6 +46,29 @@ const Items = () => {
     } else {
       quantityerr();
     }
+  };
+  const removeCart = () => {
+    fetch("http://localhost:5000/removefromcart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        productid,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        productremoved();
+        setPresent("notinCart");
+        setColor("currentcolor");
+        setQuantity("0");
+      })
+      .catch((err) => {
+        erroroc();
+        console.log(err.message);
+      });
   };
   useEffect(() => {
     fetch("http://localhost:5000/getproduct", {
@@ -73,16 +96,19 @@ const Items = () => {
       });
     // eslint-disable-next-line
   }, []);
-  const handlelogin = () => {
-    plslogin();
-  };
   const plslogin = () =>
     toast.error("To excess cart please Login to your Account", style);
   const productadded = () =>
     toast.success("Product Quantity Updated Successfully", style);
   const erroroc = () =>
     toast.error("Something Went Wrong Please try Again later....", style);
-  const quantityerr = () => toast.error("Number should be >= 0", style);
+  const quantityerr = () => toast.error("Number should be > 0", style);
+  const productremoved = () => {
+    toast.success("Product Removed Successfully", style);
+  };
+  const alreadyremoved = () => {
+    toast.error("Please add first to remove from cart..", style);
+  };
   return (
     <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">
       <ToastContainer />
@@ -169,28 +195,55 @@ const Items = () => {
                 <button
                   className="bg-indigo-500 hover:bg-indigo-400 text-black text-xl hover:text-white py-2 px-4 rounded"
                   onClick={() => {
-                    setQuantity((quantity = quantity - 1));
+                    if (quantity > 0) {
+                      setQuantity(quantity - 1);
+                    }
                   }}
                 >
                   -
                 </button>
               </div>
               {islogin === "off" ? (
-                <button
-                  className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
-                  onClick={handlelogin}
-                >
-                  <span className="mr-2">Add to Cart</span>
-                  <Cart fill={color} />
-                </button>
+                <>
+                  <button
+                    className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                    onClick={plslogin}
+                  >
+                    <span className="mr-2">Add to Cart</span>
+                    <Cart fill={color} />
+                  </button>
+                  <button
+                    className="rounded-full w-20 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                    onClick={plslogin}
+                  >
+                    <span className="mr-2 ml-2">Remove</span>
+                  </button>
+                </>
               ) : (
-                <button
-                  className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
-                  onClick={addCart}
-                >
-                  <span className="mr-2">Add to Cart</span>
-                  <Cart fill={color} />
-                </button>
+                <>
+                  <button
+                    className="rounded-full w-40 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                    onClick={addCart}
+                  >
+                    <span className="mr-2">Add to Cart</span>
+                    <Cart fill={color} />
+                  </button>
+                  {present === "notinCart" ? (
+                    <button
+                      className="rounded-full w-20 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                      onClick={alreadyremoved}
+                    >
+                      <span className="mr-2 ml-2">Remove</span>
+                    </button>
+                  ) : (
+                    <button
+                      className="rounded-full w-20 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3"
+                      onClick={removeCart}
+                    >
+                      <span className="mr-2 ml-2">Remove</span>
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>

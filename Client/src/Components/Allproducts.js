@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Allproducts = () => {
-  const location = useLocation();
   const { category } = useParams();
   const [products, setProducts] = useState([]);
-  console.log(location);
 
   useEffect(() => {
     fetch("http://localhost:5000/getproducts", {
