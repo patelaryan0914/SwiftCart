@@ -14,9 +14,6 @@ const PaymentSuccess = () => {
         Your Payment id is....
       </h2>
     </div>
-    <h2 className="text-xl text-indigo-400 text-center pb-40 tracking-widest font-medium title-font">
-        Your Cart is Empty Fill it up...
-      </h2>
     </div>
 </section>;
 };
