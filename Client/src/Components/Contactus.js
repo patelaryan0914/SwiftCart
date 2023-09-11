@@ -11,9 +11,9 @@ const Contactus = () => {
           title="map"
           width="100%"
           height="100%"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
+          frameBorder="0"
+          marginHeight="0"
+          marginWidth="0"
           scrolling="no"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29468.784985019658!2d72.819756!3d22.594129249999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e50c43cdea6c7%3A0x5074fe9e0c1c8bd!2sCharotar%20University%20of%20Science%20and%20Technology%20(CHARUSAT)!5e0!3m2!1sen!2sin!4v1690788130528!5m2!1sen!2sin"
           style={style}
