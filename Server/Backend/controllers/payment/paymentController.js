@@ -38,7 +38,7 @@ const paymentdetails = {
     const isAuthentic = expectedSignature === razorpay_signature;
 
     if (isAuthentic) {
-      // Database comes here
+      console.log();
 
       await payment.create({
         razorpay_order_id,
