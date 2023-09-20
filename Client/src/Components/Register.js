@@ -10,6 +10,18 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
+  const [profilePic, setProfilePic] = useState(null);
+
+  const handleProfilePicChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfilePic(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const generateotp = () => {
@@ -77,6 +89,34 @@ const Register = () => {
           <h1 className="text-white text-xl font-medium title-font mb-5">
             Sign Up
           </h1>
+          <div className="relative mb-5">
+            <input
+              type="file"
+              id="profile-pic"
+              name="profile-pic"
+              accept="image/*"
+              onChange={handleProfilePicChange}
+              className="hidden"
+            />
+            <label
+              htmlFor="profile-pic"
+              className="w-32 h-32 px-auto cursor-pointer rounded-full overflow-hidden"
+            >
+              {profilePic ? (
+                <img
+                  src={profilePic}
+                  alt="Profile"
+                  className="w-32 h-32 cursor-pointer mx-auto rounded-full overflow-hidden border border-gray-600"
+                />
+              ) : (
+                <div className="w-32 h-32 cursor-pointer mx-auto rounded-full overflow-hidden border border-gray-600">
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    Upload
+                  </span>
+                </div>
+              )}
+            </label>
+          </div>
           <div className="relative mb-5">
             <label
               htmlFor="username"
