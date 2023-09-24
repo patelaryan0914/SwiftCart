@@ -9,6 +9,7 @@ import Items from "./Components/Items.js";
 import Cart from "./Components/Cart.js";
 import Shippingdetails from "./Components/Shippingdetails.js";
 import Paymentsuccess from "./Components/Paymentsuccess.js";
+import Profile from "./Components/Profile.js";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/item/:id" element={<Items />} />
           <Route path="/shippingdetails" element={<Shippingdetails />} />
+          <Route path="/editprofile" element={<Profile />} />
           <Route path="/paymentsuceess" element={<Paymentsuccess />} />
         </Route>
         <Route path="/login" element={<Login />} />

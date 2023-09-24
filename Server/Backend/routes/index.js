@@ -7,7 +7,6 @@ const {
   paymentdetails,
 } = require("../controllers");
 const router = express.Router();
-
 router.post("/login", loginController.login);
 
 router.post("/register", registerController.register);

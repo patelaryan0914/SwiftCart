@@ -10,18 +10,18 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
-  const [profilePic, setProfilePic] = useState(null);
+  // const [profilePic, setProfilePic] = useState(null);
 
-  const handleProfilePicChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfilePic(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleProfilePicChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setProfilePic(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const generateotp = () => {
@@ -89,7 +89,7 @@ const Register = () => {
           <h1 className="text-white text-xl font-medium title-font mb-5">
             Sign Up
           </h1>
-          <div className="relative mb-5">
+          {/* <div className="relative mb-5">
             <input
               type="file"
               id="profile-pic"
@@ -116,7 +116,7 @@ const Register = () => {
                 </div>
               )}
             </label>
-          </div>
+          </div> */}
           <div className="relative mb-5">
             <label
               htmlFor="username"
