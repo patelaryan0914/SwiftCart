@@ -23,9 +23,15 @@ const registerController = {
   },
   async otp(req, res, next) {
     const { email, otp } = req.body;
-    console.log(email, otp);
     sendEmail(email, otp);
     res.json({ msg: "OTP" });
+  },
+  async changeusername(req,res,next){
+    const { email ,username} = req.body;
+    const data = await registration.findOneAndUpdate({email:email},{username:username})
+    if(data){
+      res.json({msg:"Updated"})
+    }
   },
 };
 

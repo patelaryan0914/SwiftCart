@@ -13,6 +13,8 @@ router.post("/register", registerController.register);
 
 router.post("/otp", registerController.otp);
 
+router.post("/updateusername", registerController.changeusername);
+
 router.post("/getproducts", fetchproduct.fetchallproductcategory);
 
 router.post("/getproduct", fetchproduct.fetchoneproductid);
