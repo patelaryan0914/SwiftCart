@@ -83,7 +83,11 @@ const Cart = () => {
       order_id: data.order.id,
       handler: function (response) {
         // const razorpay_payment_id = response.razorpay_payment_id;
-        navigate("/paymentsuceess");
+        navigate("/paymentsuceess", {
+          state: {
+            razorpay_payment_id: response.razorpay_payment_id,
+          },
+        });
         console.log(response.razorpay_payment_id);
         console.log(response.razorpay_order_id);
         console.log(response.razorpay_signature);
