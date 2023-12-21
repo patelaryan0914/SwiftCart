@@ -1,7 +1,13 @@
 const payment = require("../../Schemas/paymentSchema");
+const cart = require("../../Schemas/cartSchema");
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
-
+function pick(obj, ...props) {
+  return props.reduce(function (result, prop) {
+    result[prop] = obj[prop];
+    return result;
+  }, {});
+}
 const paymentdetails = {
   async payment(req, res, next) {
     try {
@@ -15,7 +21,6 @@ const paymentdetails = {
         currency: "INR",
       };
       const order = await instance.orders.create(options);
-
       res.status(200).json({
         success: true,
         order,
@@ -25,35 +30,27 @@ const paymentdetails = {
     }
   },
   async paymentverify(req, res, next) {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-      req.body;
+    const secret = process.env.RAZORPAY_API_SECRET;
+    const crypto = require("crypto");
 
-    const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const shasum = crypto.createHmac("sha256", secret);
+    shasum.update(JSON.stringify(req.body));
+    const digest = shasum.digest("hex");
 
-    const expectedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
-      .update(body.toString())
-      .digest("hex");
-
-    const isAuthentic = expectedSignature === razorpay_signature;
-
-    if (isAuthentic) {
-      console.log();
-
-      await payment.create({
-        razorpay_order_id,
-        razorpay_payment_id,
-        razorpay_signature,
-      });
-
-      res.redirect(
-        `http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`
-      );
+    if (digest === req.headers["x-razorpay-signature"]) {
+      const obj = req.body.payload.payment.entity;
+      const takeobj = pick(obj, "amount", "email", "id", "method", "contact");
+      const object = await cart
+        .findOne({ email: takeobj.email })
+        .select("-_id -email -__v");
+      const objf = pick(object, "products");
+      const finalobj = { ...takeobj, ...objf };
+      console.log(finalobj);
+      await payment.create(finalobj);
     } else {
-      res.status(400).json({
-        success: false,
-      });
+      res.json({ msg: "payment not Received" });
     }
+    res.json({ status: "ok" });
   },
 };
 

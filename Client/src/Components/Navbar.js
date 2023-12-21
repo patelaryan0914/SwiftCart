@@ -68,6 +68,9 @@ const Navbar = () => {
               <Link className="mr-5 hover:text-white" onClick={handlelogin}>
                 Cart
               </Link>
+              <Link className="mr-5 hover:text-white" onClick={handlelogin}>
+                Transaction History
+              </Link>
             </nav>
             <Link
               to="/login"
@@ -87,6 +90,9 @@ const Navbar = () => {
               </Link>
               <Link to="/cart" className="mr-5 hover:text-white">
                 Cart
+              </Link>
+              <Link to="/transactionhistory" className="mr-5 hover:text-white">
+                Transaction History
               </Link>
             </nav>
             <Link

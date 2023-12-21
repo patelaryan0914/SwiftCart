@@ -82,7 +82,7 @@ const Cart = () => {
       currency: data.order.currency,
       order_id: data.order.id,
       handler: function (response) {
-        // const razorpay_payment_id = response.razorpay_payment_id;
+        // console.log(response);
         navigate("/paymentsuceess", {
           state: {
             razorpay_payment_id: response.razorpay_payment_id,
@@ -92,13 +92,13 @@ const Cart = () => {
         console.log(response.razorpay_order_id);
         console.log(response.razorpay_signature);
       },
+      prefill: {
+        email: email,
+      },
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
-  // const buysuccess = () => {
-  //   toast.success("Purchase Succesfull", style);
-  // };
   const notpresent = () => {
     toast.error("Please add your shipping details", style);
   };

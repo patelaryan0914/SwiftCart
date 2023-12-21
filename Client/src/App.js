@@ -10,6 +10,7 @@ import Cart from "./Components/Cart.js";
 import Shippingdetails from "./Components/Shippingdetails.js";
 import Paymentsuccess from "./Components/Paymentsuccess.js";
 import Profile from "./Components/Profile.js";
+import TransactionHistory from "./Components/TransactionHistory.js";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/shippingdetails" element={<Shippingdetails />} />
           <Route path="/editprofile" element={<Profile />} />
           <Route path="/paymentsuceess" element={<Paymentsuccess />} />
+          <Route path="/transactionhistory" element={<TransactionHistory />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
