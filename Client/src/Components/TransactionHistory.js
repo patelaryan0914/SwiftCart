@@ -18,16 +18,16 @@ const TransactionHistory = () => {
             <thead>
               <tr>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">
-                  Plan
+                  Order_id
                 </th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">
-                  Speed
+                  Method
                 </th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">
-                  Storage
+                  Amount
                 </th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">
-                  Price
+                  Total Products
                 </th>
                 <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
               </tr>
