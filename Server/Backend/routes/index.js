@@ -31,4 +31,6 @@ router.post("/payment", paymentdetails.payment);
 
 router.post("/paymentverification", paymentdetails.paymentverify);
 
+router.post("/transactionhistory", paymentdetails.fetchPaymentHistory);
+
 module.exports = router;

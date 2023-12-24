@@ -39,18 +39,27 @@ const paymentdetails = {
 
     if (digest === req.headers["x-razorpay-signature"]) {
       const obj = req.body.payload.payment.entity;
+      obj.amount = obj.amount / 100;
       const takeobj = pick(obj, "amount", "email", "id", "method", "contact");
       const object = await cart
         .findOne({ email: takeobj.email })
         .select("-_id -email -__v");
       const objf = pick(object, "products");
       const finalobj = { ...takeobj, ...objf };
-      console.log(finalobj);
       await payment.create(finalobj);
     } else {
       res.json({ msg: "payment not Received" });
     }
     res.json({ status: "ok" });
+  },
+  async fetchPaymentHistory(req, res, next) {
+    const { email } = req.body;
+    const payments = await payment.find({ email });
+    if (payments.length == 0) {
+      return res.json({ msg: "empty" });
+    } else {
+      return res.json(payments);
+    }
   },
 };
 
