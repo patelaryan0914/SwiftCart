@@ -6,7 +6,7 @@ const TransactionHistory = () => {
   const register = useSelector((state) => state.register.value);
   const { email } = register;
   useEffect(() => {
-    fetch("http://localhost:5000/transactionhistory", {
+    fetch("https://swiftcart-py79.onrender.com/transactionhistory", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

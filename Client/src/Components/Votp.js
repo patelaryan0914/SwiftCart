@@ -30,7 +30,7 @@ const Votp = () => {
     }
   };
   const sendData = () => {
-    fetch("http://localhost:5000/register", {
+    fetch("https://swiftcart-py79.onrender.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

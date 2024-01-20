@@ -6,7 +6,7 @@ const Allproducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getproducts", {
+    fetch("https://swiftcart-py79.onrender.com/getproducts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

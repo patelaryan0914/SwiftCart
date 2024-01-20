@@ -60,7 +60,7 @@ const Register = () => {
     }
   };
   const sendotp = () => {
-    fetch("http://localhost:5000/otp", {
+    fetch("https://swiftcart-py79.onrender.com/otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

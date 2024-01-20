@@ -18,7 +18,7 @@ const Cart = () => {
     theme: "dark",
   };
   useEffect(() => {
-    fetch("http://localhost:5000/getforcart", {
+    fetch("https://swiftcart-py79.onrender.com/getforcart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const Cart = () => {
       return;
     }
 
-    const data = await fetch("http://localhost:5000/payment", {
+    const data = await fetch("https://swiftcart-py79.onrender.com/payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
