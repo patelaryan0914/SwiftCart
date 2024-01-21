@@ -31,19 +31,23 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        slogin();
-        dispatch(
-          register({
-            username: data.user.username,
-            email: data.user.email,
-            token: data.token,
-            islogin: "on",
-          })
-        );
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
+        if (data) {
+          console.log(data);
+          slogin();
+          dispatch(
+            register({
+              username: data.user.username,
+              email: data.user.email,
+              token: data.token,
+              islogin: "on",
+            })
+          );
+          setTimeout(() => {
+            navigate("/");
+          }, 3000);
+        } else {
+          nlogin();
+        }
       })
       .catch((err) => {
         console.log(err.message);
@@ -51,15 +55,16 @@ const Login = () => {
   };
   // const elogin = () => toast.error("Passwords Does not match.", style);
   const slogin = () => toast.success("Login Successful", style);
+  const nlogin = () => toast.error("Something Went Wrong", style);
   return (
-    <section className="text-gray-400 bg-gray-900	min-h-screen body-font">
+    <section className="text-gray-400 bg-gray-900 min-h-screen body-font">
       <ToastContainer />
-      <div className="container px-5 py-24 mx-auto flex flex-wrap items-center ">
-        <div className=" bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col mx-auto my-10 h-4/6 w-4/12 ">
-          <h1 className="text-white text-xl font-medium title-font mb-5">
+      <div className="container px-5 py-8 mx-auto md:flex md:items-center md:py-24">
+        <div className="md:w-1/2 lg:w-1/3 mx-auto bg-gray-800 bg-opacity-50 rounded-lg p-8 my-10">
+          <h1 className="text-white text-2xl font-medium title-font mb-5">
             Log in
           </h1>
-          <div className="relative mb-5">
+          <div className="mb-5">
             <label
               htmlFor="email"
               className="leading-7 text-base text-gray-400"
@@ -75,7 +80,7 @@ const Login = () => {
               required
             />
           </div>
-          <div className="relative mb-5">
+          <div className="mb-5">
             <label
               htmlFor="password"
               className="leading-7 text-base text-gray-400"
@@ -91,18 +96,15 @@ const Login = () => {
             />
           </div>
           <button
-            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+            className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center w-full"
             onClick={handleonclick}
           >
             Submit
           </button>
-          {/* <NavLink className="text-sm mt-4 text-center">
-            Forgot password?
-          </NavLink> */}
           <h4 className="text-center my-4">OR</h4>
           <Link
             to="/register"
-            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+            className="flex flex-col items-center text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
           >
             Signup
           </Link>

@@ -82,42 +82,14 @@ const Register = () => {
   const spass = () => toast.success("Otp Send to the email you entered", style);
   const edet = () => toast.error("Fill up all the required details", style);
   return (
-    <section className="text-gray-400 bg-gray-900	min-h-screen body-font">
+    <section className="text-gray-400 bg-gray-900 min-h-screen body-font">
       <ToastContainer />
-      <div className="container px-5 py-24 mx-auto flex flex-wrap items-center ">
-        <div className=" bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col mx-auto my-10 h-4/6 w-4/12 ">
+      <div className="container px-5 py-8 mx-auto flex flex-wrap items-center">
+        <div className="bg-gray-800 bg-opacity-50 rounded-lg p-8 mx-auto my-10 w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
           <h1 className="text-white text-xl font-medium title-font mb-5">
             Sign Up
           </h1>
-          {/* <div className="relative mb-5">
-            <input
-              type="file"
-              id="profile-pic"
-              name="profile-pic"
-              accept="image/*"
-              onChange={handleProfilePicChange}
-              className="hidden"
-            />
-            <label
-              htmlFor="profile-pic"
-              className="w-32 h-32 px-auto cursor-pointer rounded-full overflow-hidden"
-            >
-              {profilePic ? (
-                <img
-                  src={profilePic}
-                  alt="Profile"
-                  className="w-32 h-32 cursor-pointer mx-auto rounded-full overflow-hidden border border-gray-600"
-                />
-              ) : (
-                <div className="w-32 h-32 cursor-pointer mx-auto rounded-full overflow-hidden border border-gray-600">
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    Upload
-                  </span>
-                </div>
-              )}
-            </label>
-          </div> */}
-          <div className="relative mb-5">
+          <div className="mb-5">
             <label
               htmlFor="username"
               className="leading-7 text-base text-gray-400"
@@ -133,7 +105,7 @@ const Register = () => {
               required
             />
           </div>
-          <div className="relative mb-5">
+          <div className="mb-5">
             <label
               htmlFor="email"
               className="leading-7 text-base text-gray-400"
@@ -149,7 +121,7 @@ const Register = () => {
               required
             />
           </div>
-          <div className="relative mb-5">
+          <div className="mb-5">
             <label
               htmlFor="password"
               className="leading-7 text-base text-gray-400"
@@ -164,7 +136,7 @@ const Register = () => {
               className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 rounded border border-gray-600 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-          <div className="relative mb-5">
+          <div className="mb-5">
             <label
               htmlFor="cpassword"
               className="leading-7 text-base text-gray-400"
@@ -180,7 +152,7 @@ const Register = () => {
             />
           </div>
           <button
-            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center w-full"
             onClick={handleonclick}
           >
             Submit
