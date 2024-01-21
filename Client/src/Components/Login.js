@@ -31,7 +31,7 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data) {
+        if (data.status !== 200) {
           console.log(data);
           slogin();
           dispatch(

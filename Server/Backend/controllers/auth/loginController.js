@@ -15,7 +15,9 @@ const loginController = {
         const token = jwt.sign({ email: email }, JWT_SECRET, {
           expiresIn: "1 days",
         });
-        res.json({ user, token });
+        res.json({ user, token, status: 200 });
+      } else {
+        res.json({ message: "User Not Found", status: 400 });
       }
     } catch (err) {
       console.log(err);
