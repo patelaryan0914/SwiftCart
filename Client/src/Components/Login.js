@@ -55,7 +55,7 @@ const Login = () => {
   };
   // const elogin = () => toast.error("Passwords Does not match.", style);
   const slogin = () => toast.success("Login Successful", style);
-  const nlogin = () => toast.error("Something Went Wrong", style);
+  const nlogin = () => toast.error("User Does not Exist", style);
   return (
     <section className="text-gray-400 bg-gray-900 min-h-screen body-font">
       <ToastContainer />
