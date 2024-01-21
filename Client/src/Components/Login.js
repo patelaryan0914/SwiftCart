@@ -44,7 +44,8 @@ const Login = () => {
           setTimeout(() => {
             navigate("/");
           }, 3000);
-        } else {
+        }
+        if (data.status === 400) {
           nlogin();
         }
       })
